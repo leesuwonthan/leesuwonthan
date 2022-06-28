@@ -1,0 +1,3748 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>try cleaning text with basic package | Jaden Lee</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="try cleaning text with basic package" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="WELCOME TO DATA SCIENCE PORTFOLIO WHERE MY JOURNEY BEGINS" />
+<meta property="og:description" content="WELCOME TO DATA SCIENCE PORTFOLIO WHERE MY JOURNEY BEGINS" />
+<link rel="canonical" href="https://leesuwonthan.github.io/leesuwonthan/2022/06/27/Lab2_sentiment_analysis.html" />
+<meta property="og:url" content="https://leesuwonthan.github.io/leesuwonthan/2022/06/27/Lab2_sentiment_analysis.html" />
+<meta property="og:site_name" content="Jaden Lee" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-27T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="try cleaning text with basic package" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-06-27T00:00:00-05:00","datePublished":"2022-06-27T00:00:00-05:00","description":"WELCOME TO DATA SCIENCE PORTFOLIO WHERE MY JOURNEY BEGINS","headline":"try cleaning text with basic package","mainEntityOfPage":{"@type":"WebPage","@id":"https://leesuwonthan.github.io/leesuwonthan/2022/06/27/Lab2_sentiment_analysis.html"},"url":"https://leesuwonthan.github.io/leesuwonthan/2022/06/27/Lab2_sentiment_analysis.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/leesuwonthan/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://leesuwonthan.github.io/leesuwonthan/feed.xml" title="Jaden Lee" /><link rel="shortcut icon" type="image/x-icon" href="/leesuwonthan/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/leesuwonthan/">Jaden Lee</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/leesuwonthan/about/">About Me</a><a class="page-link" href="/leesuwonthan/search/">Search</a><a class="page-link" href="/leesuwonthan/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">try cleaning text with basic package &lt;Hope it works&gt;</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-27T00:00:00-05:00" itemprop="datePublished">
+        Jun 27, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      28 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-justify-center">
+          <div class="px-2">
+
+    <a href="https://github.com/leesuwonthan/leesuwonthan/tree/master/_notebooks/Lab2_sentiment_analysis.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/leesuwonthan/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/leesuwonthan/leesuwonthan/master?filepath=_notebooks%2FLab2_sentiment_analysis.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/leesuwonthan/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/leesuwonthan/leesuwonthan/blob/master/_notebooks/Lab2_sentiment_analysis.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/leesuwonthan/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fleesuwonthan%2Fleesuwonthan%2Fblob%2Fmaster%2F_notebooks%2FLab2_sentiment_analysis.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/leesuwonthan/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/Lab2_sentiment_analysis.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <span class="n">WordCloud</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">keras.preprocessing.text</span> <span class="kn">import</span> <span class="n">Tokenizer</span>
+<span class="kn">from</span> <span class="nn">keras.preprocessing.sequence</span> <span class="kn">import</span> <span class="n">pad_sequences</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">AttributeError</span>                            Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">~\AppData\Local\Temp/ipykernel_11836/3229680285.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">      4</span> <span class="ansi-green-intense-fg ansi-bold">from</span> wordcloud <span class="ansi-green-intense-fg ansi-bold">import</span> WordCloud
+<span class="ansi-green-fg">      5</span> <span class="ansi-green-intense-fg ansi-bold">import</span> matplotlib<span class="ansi-yellow-intense-fg ansi-bold">.</span>pyplot <span class="ansi-green-intense-fg ansi-bold">as</span> plt
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 6</span><span class="ansi-yellow-intense-fg ansi-bold"> </span><span class="ansi-green-intense-fg ansi-bold">import</span> nltk
+<span class="ansi-green-fg">      7</span> <span class="ansi-green-intense-fg ansi-bold">from</span> keras<span class="ansi-yellow-intense-fg ansi-bold">.</span>preprocessing<span class="ansi-yellow-intense-fg ansi-bold">.</span>text <span class="ansi-green-intense-fg ansi-bold">import</span> Tokenizer
+<span class="ansi-green-fg">      8</span> <span class="ansi-green-intense-fg ansi-bold">from</span> keras<span class="ansi-yellow-intense-fg ansi-bold">.</span>preprocessing<span class="ansi-yellow-intense-fg ansi-bold">.</span>sequence <span class="ansi-green-intense-fg ansi-bold">import</span> pad_sequences
+
+<span class="ansi-green-intense-fg ansi-bold">C:\Python\lib\site-packages\nltk\__init__.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">    177</span>     <span class="ansi-green-intense-fg ansi-bold">from</span> nltk <span class="ansi-green-intense-fg ansi-bold">import</span> cluster
+<span class="ansi-green-fg">    178</span> 
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 179</span><span class="ansi-yellow-intense-fg ansi-bold"> </span><span class="ansi-green-intense-fg ansi-bold">from</span> nltk<span class="ansi-yellow-intense-fg ansi-bold">.</span>downloader <span class="ansi-green-intense-fg ansi-bold">import</span> download<span class="ansi-yellow-intense-fg ansi-bold">,</span> download_shell
+<span class="ansi-green-fg">    180</span> 
+<span class="ansi-green-fg">    181</span> <span class="ansi-green-intense-fg ansi-bold">try</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+
+<span class="ansi-green-intense-fg ansi-bold">C:\Python\lib\site-packages\nltk\downloader.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">   2463</span> 
+<span class="ansi-green-fg">   2464</span> <span class="ansi-red-intense-fg ansi-bold"># Aliases</span>
+<span class="ansi-green-intense-fg ansi-bold">-&gt; 2465</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>_downloader <span class="ansi-yellow-intense-fg ansi-bold">=</span> Downloader<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">   2466</span> download <span class="ansi-yellow-intense-fg ansi-bold">=</span> _downloader<span class="ansi-yellow-intense-fg ansi-bold">.</span>download
+<span class="ansi-green-fg">   2467</span> 
+
+<span class="ansi-green-intense-fg ansi-bold">C:\Python\lib\site-packages\nltk\downloader.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-intense-fg ansi-bold">(self, server_index_url, download_dir)</span>
+<span class="ansi-green-fg">    512</span>         <span class="ansi-red-intense-fg ansi-bold"># decide where we&#39;re going to save things to.</span>
+<span class="ansi-green-fg">    513</span>         <span class="ansi-green-intense-fg ansi-bold">if</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_download_dir <span class="ansi-green-intense-fg ansi-bold">is</span> <span class="ansi-green-intense-fg ansi-bold">None</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 514</span><span class="ansi-yellow-intense-fg ansi-bold">             </span>self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_download_dir <span class="ansi-yellow-intense-fg ansi-bold">=</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>default_download_dir<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">    515</span> 
+<span class="ansi-green-fg">    516</span>     <span class="ansi-red-intense-fg ansi-bold"># /////////////////////////////////////////////////////////////////</span>
+
+<span class="ansi-green-intense-fg ansi-bold">C:\Python\lib\site-packages\nltk\downloader.py</span> in <span class="ansi-cyan-fg">default_download_dir</span><span class="ansi-blue-intense-fg ansi-bold">(self)</span>
+<span class="ansi-green-fg">   1068</span>         <span class="ansi-red-intense-fg ansi-bold"># Check if we have sufficient permissions to install in a</span>
+<span class="ansi-green-fg">   1069</span>         <span class="ansi-red-intense-fg ansi-bold"># variety of system-wide locations.</span>
+<span class="ansi-green-intense-fg ansi-bold">-&gt; 1070</span><span class="ansi-yellow-intense-fg ansi-bold">         </span><span class="ansi-green-intense-fg ansi-bold">for</span> nltkdir <span class="ansi-green-intense-fg ansi-bold">in</span> nltk<span class="ansi-yellow-intense-fg ansi-bold">.</span>data<span class="ansi-yellow-intense-fg ansi-bold">.</span>path<span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">   1071</span>             <span class="ansi-green-intense-fg ansi-bold">if</span> os<span class="ansi-yellow-intense-fg ansi-bold">.</span>path<span class="ansi-yellow-intense-fg ansi-bold">.</span>exists<span class="ansi-yellow-intense-fg ansi-bold">(</span>nltkdir<span class="ansi-yellow-intense-fg ansi-bold">)</span> <span class="ansi-green-intense-fg ansi-bold">and</span> nltk<span class="ansi-yellow-intense-fg ansi-bold">.</span>internals<span class="ansi-yellow-intense-fg ansi-bold">.</span>is_writable<span class="ansi-yellow-intense-fg ansi-bold">(</span>nltkdir<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">   1072</span>                 <span class="ansi-green-intense-fg ansi-bold">return</span> nltkdir
+
+<span class="ansi-red-intense-fg ansi-bold">AttributeError</span>: partially initialized module &#39;nltk&#39; has no attribute &#39;data&#39; (most likely due to a circular import)</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="How-to-Approach">How to Approach<a class="anchor-link" href="#How-to-Approach"> </a></h1><p>1) using bag of word in feature extraction
+2) trying NER; For sentiment analysis, adj. is most important
+3) How to deal with those opinion and slang ??
+4) How to deal with negation good != not good
+5) splitting data into epoch cuz it's too big to put all in model at once</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_iden</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data_identification.csv&quot;</span><span class="p">)</span>
+<span class="n">df_iden</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tweet_id</th>
+      <th>identification</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0x28cc61</td>
+      <td>test</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0x29e452</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0x2b3819</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0x2db41f</td>
+      <td>test</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0x2a2acc</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1867530</th>
+      <td>0x227e25</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>1867531</th>
+      <td>0x293813</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>1867532</th>
+      <td>0x1e1a7e</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>1867533</th>
+      <td>0x2156a5</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>1867534</th>
+      <td>0x2bb9d2</td>
+      <td>train</td>
+    </tr>
+  </tbody>
+</table>
+<p>1867535 rows × 2 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_iden</span><span class="o">=</span> <span class="n">df_iden</span><span class="p">[</span><span class="n">df_iden</span><span class="p">[</span><span class="s1">&#39;identification&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;test&#39;</span><span class="p">]</span>
+<span class="n">df_test</span> <span class="o">=</span><span class="n">df_iden</span>
+<span class="n">df_test</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="c1"># test set</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tweet_id          411972
+identification    411972
+dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data_identification</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data_identification.csv&quot;</span><span class="p">)</span>
+<span class="n">data_identification</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tweet_id</th>
+      <th>identification</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0x28cc61</td>
+      <td>test</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0x29e452</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0x2b3819</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0x2db41f</td>
+      <td>test</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0x2a2acc</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1867530</th>
+      <td>0x227e25</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>1867531</th>
+      <td>0x293813</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>1867532</th>
+      <td>0x1e1a7e</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>1867533</th>
+      <td>0x2156a5</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>1867534</th>
+      <td>0x2bb9d2</td>
+      <td>train</td>
+    </tr>
+  </tbody>
+</table>
+<p>1867535 rows × 2 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test</span><span class="o">=</span> <span class="n">df_test</span><span class="p">[</span><span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;identification&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;test&#39;</span><span class="p">]</span>
+<span class="n">df_test</span><span class="o">=</span><span class="n">df_test</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">df_test</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tweet_id</th>
+      <th>identification</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0x28cc61</td>
+      <td>test</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0x2db41f</td>
+      <td>test</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>0x2466f6</td>
+      <td>test</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>0x23f9e9</td>
+      <td>test</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>0x1fb4e1</td>
+      <td>test</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1867495</th>
+      <td>0x2c4dc2</td>
+      <td>test</td>
+    </tr>
+    <tr>
+      <th>1867496</th>
+      <td>0x31be7c</td>
+      <td>test</td>
+    </tr>
+    <tr>
+      <th>1867500</th>
+      <td>0x1ca58e</td>
+      <td>test</td>
+    </tr>
+    <tr>
+      <th>1867515</th>
+      <td>0x35c8ba</td>
+      <td>test</td>
+    </tr>
+    <tr>
+      <th>1867518</th>
+      <td>0x1d941b</td>
+      <td>test</td>
+    </tr>
+  </tbody>
+</table>
+<p>411972 rows × 2 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train</span> <span class="o">=</span> <span class="n">data_identification</span><span class="p">[</span><span class="n">data_identification</span><span class="p">[</span><span class="s1">&#39;identification&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;train&#39;</span><span class="p">]</span>
+<span class="n">df_train</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tweet_id</th>
+      <th>identification</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0x29e452</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0x2b3819</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0x2a2acc</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0x2a8830</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0x20b21d</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1867530</th>
+      <td>0x227e25</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>1867531</th>
+      <td>0x293813</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>1867532</th>
+      <td>0x1e1a7e</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>1867533</th>
+      <td>0x2156a5</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>1867534</th>
+      <td>0x2bb9d2</td>
+      <td>train</td>
+    </tr>
+  </tbody>
+</table>
+<p>1455563 rows × 2 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">emo_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;emotion.csv&quot;</span><span class="p">)</span>
+<span class="n">tweets_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;tweets_DM.json&#39;</span><span class="p">,</span><span class="n">lines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>_score</th>
+      <th>_index</th>
+      <th>_source</th>
+      <th>_crawldate</th>
+      <th>_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>391</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['Snapchat'], 'tweet_id...</td>
+      <td>2015-05-23 11:42:47</td>
+      <td>tweets</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>433</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['freepress', 'TrumpLeg...</td>
+      <td>2016-01-28 04:52:09</td>
+      <td>tweets</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>232</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['bibleverse'], 'tweet_...</td>
+      <td>2017-12-25 04:39:20</td>
+      <td>tweets</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>376</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x1cd5...</td>
+      <td>2016-01-24 23:53:05</td>
+      <td>tweets</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>989</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2de2...</td>
+      <td>2016-01-08 17:18:59</td>
+      <td>tweets</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1867530</th>
+      <td>827</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['mixedfeeling', 'butim...</td>
+      <td>2015-05-12 12:51:52</td>
+      <td>tweets</td>
+    </tr>
+    <tr>
+      <th>1867531</th>
+      <td>368</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x29d0...</td>
+      <td>2017-10-02 17:54:04</td>
+      <td>tweets</td>
+    </tr>
+    <tr>
+      <th>1867532</th>
+      <td>498</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2a6a...</td>
+      <td>2016-10-10 11:04:32</td>
+      <td>tweets</td>
+    </tr>
+    <tr>
+      <th>1867533</th>
+      <td>840</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x24fa...</td>
+      <td>2016-09-02 14:25:06</td>
+      <td>tweets</td>
+    </tr>
+    <tr>
+      <th>1867534</th>
+      <td>360</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['Sundayvibes'], 'tweet...</td>
+      <td>2016-11-16 01:40:07</td>
+      <td>tweets</td>
+    </tr>
+  </tbody>
+</table>
+<p>1867535 rows × 5 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>_score</th>
+      <th>_index</th>
+      <th>_source</th>
+      <th>_crawldate</th>
+      <th>_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>391</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['Snapchat'], 'tweet_id...</td>
+      <td>2015-05-23 11:42:47</td>
+      <td>tweets</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>433</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['freepress', 'TrumpLeg...</td>
+      <td>2016-01-28 04:52:09</td>
+      <td>tweets</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>232</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['bibleverse'], 'tweet_...</td>
+      <td>2017-12-25 04:39:20</td>
+      <td>tweets</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>376</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x1cd5...</td>
+      <td>2016-01-24 23:53:05</td>
+      <td>tweets</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>989</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2de2...</td>
+      <td>2016-01-08 17:18:59</td>
+      <td>tweets</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>_score</th>
+      <th>_index</th>
+      <th>_source</th>
+      <th>_crawldate</th>
+      <th>_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1867530</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1867531</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1867532</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1867533</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1867534</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+<p>1867535 rows × 5 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(1867535, 5)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">tweets_df</span><span class="p">[</span><span class="s1">&#39;_source&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="c1"># extract text coulum to be list obj</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">json_normalize</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span> <span class="c1"># normalize data</span>
+<span class="n">tweets_DM</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">tweets_df</span><span class="p">,</span> <span class="n">df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># concat them again</span>
+
+<span class="n">tweets_DM</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>_score</th>
+      <th>_index</th>
+      <th>_source</th>
+      <th>_crawldate</th>
+      <th>_type</th>
+      <th>tweet.hashtags</th>
+      <th>tweet.tweet_id</th>
+      <th>tweet.text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>391</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['Snapchat'], 'tweet_id...</td>
+      <td>2015-05-23 11:42:47</td>
+      <td>tweets</td>
+      <td>[Snapchat]</td>
+      <td>0x376b20</td>
+      <td>People who post "add me on #Snapchat" must be ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>433</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['freepress', 'TrumpLeg...</td>
+      <td>2016-01-28 04:52:09</td>
+      <td>tweets</td>
+      <td>[freepress, TrumpLegacy, CNN]</td>
+      <td>0x2d5350</td>
+      <td>@brianklaas As we see, Trump is dangerous to #...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>232</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['bibleverse'], 'tweet_...</td>
+      <td>2017-12-25 04:39:20</td>
+      <td>tweets</td>
+      <td>[bibleverse]</td>
+      <td>0x28b412</td>
+      <td>Confident of your obedience, I write to you, k...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>376</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x1cd5...</td>
+      <td>2016-01-24 23:53:05</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x1cd5b0</td>
+      <td>Now ISSA is stalking Tasha 😂😂😂 &lt;LH&gt;</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>989</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2de2...</td>
+      <td>2016-01-08 17:18:59</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2de201</td>
+      <td>"Trust is not the same as faith. A friend is s...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1867530</th>
+      <td>827</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['mixedfeeling', 'butim...</td>
+      <td>2015-05-12 12:51:52</td>
+      <td>tweets</td>
+      <td>[mixedfeeling, butimTHATperson]</td>
+      <td>0x316b80</td>
+      <td>When you buy the last 2 tickets remaining for ...</td>
+    </tr>
+    <tr>
+      <th>1867531</th>
+      <td>368</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x29d0...</td>
+      <td>2017-10-02 17:54:04</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x29d0cb</td>
+      <td>I swear all this hard work gone pay off one da...</td>
+    </tr>
+    <tr>
+      <th>1867532</th>
+      <td>498</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2a6a...</td>
+      <td>2016-10-10 11:04:32</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2a6a4f</td>
+      <td>@Parcel2Go no card left when I wasn't in so I ...</td>
+    </tr>
+    <tr>
+      <th>1867533</th>
+      <td>840</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x24fa...</td>
+      <td>2016-09-02 14:25:06</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x24faed</td>
+      <td>Ah, corporate life, where you can date &lt;LH&gt; us...</td>
+    </tr>
+    <tr>
+      <th>1867534</th>
+      <td>360</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['Sundayvibes'], 'tweet...</td>
+      <td>2016-11-16 01:40:07</td>
+      <td>tweets</td>
+      <td>[Sundayvibes]</td>
+      <td>0x34be8c</td>
+      <td>Blessed to be living #Sundayvibes &lt;LH&gt;</td>
+    </tr>
+  </tbody>
+</table>
+<p>1867535 rows × 8 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">clean_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;[</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">),</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;\w*\d\w*&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[^A-Za-z0-9^,!.\/&#39;+-=]&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;what&#39;s&quot;</span><span class="p">,</span> <span class="s2">&quot;what is &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\&#39;s&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\&#39;ve&quot;</span><span class="p">,</span> <span class="s2">&quot; have &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;n&#39;t&quot;</span><span class="p">,</span> <span class="s2">&quot; not &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;i&#39;m&quot;</span><span class="p">,</span> <span class="s2">&quot;i am &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\&#39;re&quot;</span><span class="p">,</span> <span class="s2">&quot; are &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\&#39;d&quot;</span><span class="p">,</span> <span class="s2">&quot; would &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\&#39;ll&quot;</span><span class="p">,</span> <span class="s2">&quot; will &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\.&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;!&quot;</span><span class="p">,</span> <span class="s2">&quot; ! &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\/&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\^&quot;</span><span class="p">,</span> <span class="s2">&quot; ^ &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\+&quot;</span><span class="p">,</span> <span class="s2">&quot; + &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\-&quot;</span><span class="p">,</span> <span class="s2">&quot; - &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\=&quot;</span><span class="p">,</span> <span class="s2">&quot; = &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(\d+)(k)&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\g&lt;1&gt;000&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="s2">&quot; : &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot; e g &quot;</span><span class="p">,</span> <span class="s2">&quot; eg &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot; b g &quot;</span><span class="p">,</span> <span class="s2">&quot; bg &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot; u s &quot;</span><span class="p">,</span> <span class="s2">&quot; american &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\0s&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot; 9 11 &quot;</span><span class="p">,</span> <span class="s2">&quot;911&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;e - mail&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;j k&quot;</span><span class="p">,</span> <span class="s2">&quot;jk&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s{2,}&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&lt;LH&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_DM</span><span class="p">[</span><span class="s1">&#39;text_clean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tweets_DM</span><span class="p">[</span><span class="s1">&#39;tweet.text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">clean_text</span><span class="p">)</span>
+<span class="n">tweets_DM</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="mi">10</span><span class="p">][:][</span><span class="mi">0</span><span class="p">:</span><span class="mi">40</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>_score</th>
+      <th>_index</th>
+      <th>_source</th>
+      <th>_crawldate</th>
+      <th>_type</th>
+      <th>tweet.hashtags</th>
+      <th>tweet.tweet_id</th>
+      <th>tweet.text</th>
+      <th>text_clean</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>391</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['Snapchat'], 'tweet_id...</td>
+      <td>2015-05-23 11:42:47</td>
+      <td>tweets</td>
+      <td>[Snapchat]</td>
+      <td>0x376b20</td>
+      <td>People who post "add me on #Snapchat" must be ...</td>
+      <td>people who post add me on snapchat must be deh...</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>631</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['SSM', 'gender', 'dive...</td>
+      <td>2016-08-05 21:15:36</td>
+      <td>tweets</td>
+      <td>[SSM, gender, diversity]</td>
+      <td>0x359db9</td>
+      <td>The #SSM debate; &lt;LH&gt; (a manufactured fantasy ...</td>
+      <td>the ssm debate lh a manufactured fantasy used ...</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>705</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['ThankULord'], 'tweet_...</td>
+      <td>2017-07-22 12:30:48</td>
+      <td>tweets</td>
+      <td>[ThankULord]</td>
+      <td>0x2c49da</td>
+      <td>Giving thanks to my lord and savior for allowi...</td>
+      <td>giving thanks to my lord and savior for allowi...</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>104</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['GodsPlan', 'GodsWork'...</td>
+      <td>2015-10-10 14:33:26</td>
+      <td>tweets</td>
+      <td>[GodsPlan, GodsWork]</td>
+      <td>0x2939d5</td>
+      <td>God woke you up, now chase the day #GodsPlan #...</td>
+      <td>god woke you up now chase the day godsplan god...</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>663</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['hangry', 'needfood'],...</td>
+      <td>2016-10-19 04:57:08</td>
+      <td>tweets</td>
+      <td>[hangry, needfood]</td>
+      <td>0x2ac7bd</td>
+      <td>Hangry and ready to snap. #hangry &lt;LH&gt; #needfo...</td>
+      <td>hangry and ready to snap hangry lh needfood</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>641</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x20ca...</td>
+      <td>2015-09-15 20:21:03</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x20caf5</td>
+      <td>@peplamb There is no &lt;LH&gt; if @realDonaldTrump ...</td>
+      <td>peplamb there is no lh if realdonaldtrump is p...</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <td>100</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['scared'], 'tweet_id':...</td>
+      <td>2016-10-01 17:49:08</td>
+      <td>tweets</td>
+      <td>[scared]</td>
+      <td>0x2bf9ce</td>
+      <td>Saw the county's bitch today. Pulled up next t...</td>
+      <td>saw the countys bitch today pulled up next to ...</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <td>406</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2c97...</td>
+      <td>2015-07-22 04:43:33</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2c9756</td>
+      <td>&lt;LH&gt; &lt;LH&gt; &lt;LH&gt; Nimrodel beckons and geranosaur...</td>
+      <td>lh lh lh nimrodel beckons and geranosaurus baf...</td>
+    </tr>
+    <tr>
+      <th>80</th>
+      <td>394</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x37e9...</td>
+      <td>2017-08-01 05:05:31</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x37e94f</td>
+      <td>Happy Thanksgiving  &lt;LH&gt; 🦃🦃</td>
+      <td>happy thanksgiving lh</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>229</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['Shooting', 'Valley', ...</td>
+      <td>2015-02-05 13:06:27</td>
+      <td>tweets</td>
+      <td>[Shooting, Valley, Girls, like, saying, Really]</td>
+      <td>0x212d86</td>
+      <td>We should take #Shooting #Valley #Girls for #l...</td>
+      <td>we should take shooting valley girls for like ...</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>54</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['OneIfTheGreats', 'Ama...</td>
+      <td>2017-05-16 20:37:45</td>
+      <td>tweets</td>
+      <td>[OneIfTheGreats, Amazing]</td>
+      <td>0x324f39</td>
+      <td>Happy Birthday @KeyshiaCole #OneIfTheGreats  #...</td>
+      <td>happy birthday keyshiacole oneifthegreats amaz...</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <td>684</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x3403...</td>
+      <td>2015-12-09 11:14:38</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x340367</td>
+      <td>And as, I drove off into the abyss, I heard tw...</td>
+      <td>and as i drove off into the abyss i heard two ...</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>978</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2b81...</td>
+      <td>2016-10-13 04:56:16</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2b81e7</td>
+      <td>@SGPT6 Hi SuzyQ.    if you like me; @StatusTih...</td>
+      <td>hi suzyq if you like me statustihange and sta...</td>
+    </tr>
+    <tr>
+      <th>130</th>
+      <td>22</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2e4b...</td>
+      <td>2016-05-20 04:23:06</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2e4ba5</td>
+      <td>to be &lt;LH&gt;  it's all we want, right?</td>
+      <td>to be lh its all we want right</td>
+    </tr>
+    <tr>
+      <th>140</th>
+      <td>540</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x245e...</td>
+      <td>2016-07-21 05:34:13</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x245e5b</td>
+      <td>@realDonaldTrump It's been on the news all day...</td>
+      <td>realdonaldtrump its been on the news all day u...</td>
+    </tr>
+    <tr>
+      <th>150</th>
+      <td>1020</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['everyday', 'special']...</td>
+      <td>2015-11-08 06:29:28</td>
+      <td>tweets</td>
+      <td>[everyday, special]</td>
+      <td>0x359571</td>
+      <td>31 Push the &lt;LH&gt; #everyday. Be some #special. ...</td>
+      <td>push the lh everyday be some special lh novem...</td>
+    </tr>
+    <tr>
+      <th>160</th>
+      <td>121</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['podcast', 'gay', 'gay...</td>
+      <td>2015-03-02 14:16:44</td>
+      <td>tweets</td>
+      <td>[podcast, gay, gayrights]</td>
+      <td>0x2eb6c9</td>
+      <td>"#faith #podcast #gay #gayrights &lt;LH&gt; truth ti...</td>
+      <td>faith podcast gay gayrights lh truth time yes ...</td>
+    </tr>
+    <tr>
+      <th>170</th>
+      <td>253</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['Muhammad'], 'tweet_id...</td>
+      <td>2017-01-18 01:16:52</td>
+      <td>tweets</td>
+      <td>[Muhammad]</td>
+      <td>0x2fb9b9</td>
+      <td>@albushra_news I'm HAPPY... I am SO HAPPY beca...</td>
+      <td>albushranews im happy i am so happy becaus im ...</td>
+    </tr>
+    <tr>
+      <th>180</th>
+      <td>125</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['KarniSena', 'Padmavat...</td>
+      <td>2016-11-15 14:00:47</td>
+      <td>tweets</td>
+      <td>[KarniSena, Padmavati, rapist, Rapist, Hanged]</td>
+      <td>0x22d770</td>
+      <td>@IndianExpress #KarniSena are concerned about ...</td>
+      <td>indianexpress karnisena are concerned about pa...</td>
+    </tr>
+    <tr>
+      <th>190</th>
+      <td>369</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['PuertoRico'], 'tweet_...</td>
+      <td>2016-08-01 18:10:02</td>
+      <td>tweets</td>
+      <td>[PuertoRico]</td>
+      <td>0x1f0f0d</td>
+      <td>@realDonaldTrump Other places have been hit by...</td>
+      <td>realdonaldtrump other places have been hit by ...</td>
+    </tr>
+    <tr>
+      <th>200</th>
+      <td>534</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2c0c...</td>
+      <td>2015-03-11 18:57:04</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2c0cbb</td>
+      <td>My boyfriend and girlfriend both gave me a s/o...</td>
+      <td>my boyfriend and girlfriend both gave me a so ...</td>
+    </tr>
+    <tr>
+      <th>210</th>
+      <td>641</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['Batman', 'animation']...</td>
+      <td>2015-02-05 17:28:30</td>
+      <td>tweets</td>
+      <td>[Batman, animation]</td>
+      <td>0x28feb2</td>
+      <td>BATMAN FACT: #Batman : The Animated Series was...</td>
+      <td>batman fact batman the animated series was dra...</td>
+    </tr>
+    <tr>
+      <th>220</th>
+      <td>573</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['GCCC', 'SCMP', 'yyc',...</td>
+      <td>2015-08-02 22:33:24</td>
+      <td>tweets</td>
+      <td>[GCCC, SCMP, yyc, certification, communications]</td>
+      <td>0x3186fc</td>
+      <td>Well, I did it. I registered to write the @IAB...</td>
+      <td>well i did it i registered to write the iabc g...</td>
+    </tr>
+    <tr>
+      <th>230</th>
+      <td>917</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['Phoenixrally', 'Racis...</td>
+      <td>2015-10-23 05:59:36</td>
+      <td>tweets</td>
+      <td>[Phoenixrally, Racism, Mongering]</td>
+      <td>0x1da74e</td>
+      <td>Trump is literally using the same rhetoric he ...</td>
+      <td>trump is literally using the same rhetoric he ...</td>
+    </tr>
+    <tr>
+      <th>240</th>
+      <td>761</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['gross'], 'tweet_id': ...</td>
+      <td>2016-09-22 11:37:21</td>
+      <td>tweets</td>
+      <td>[gross]</td>
+      <td>0x32a30f</td>
+      <td>I'm a pretty nonjudgmental person but tbh it's...</td>
+      <td>im a pretty nonjudgmental person but tbh its d...</td>
+    </tr>
+    <tr>
+      <th>250</th>
+      <td>266</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['wonder', 'tellherhowy...</td>
+      <td>2017-04-15 14:26:47</td>
+      <td>tweets</td>
+      <td>[wonder, tellherhowyoureallyfeel]</td>
+      <td>0x201000</td>
+      <td>Why does &lt;LH&gt; elicit feelings of #wonder and a...</td>
+      <td>why does lh elicit feelings of wonder and abje...</td>
+    </tr>
+    <tr>
+      <th>260</th>
+      <td>770</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x239a...</td>
+      <td>2016-02-28 03:00:46</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x239ab5</td>
+      <td>@jennerific713 @realDonaldTrump @USNavy @hanni...</td>
+      <td>realdonaldtrump usnavy hannity tuckercarlson ...</td>
+    </tr>
+    <tr>
+      <th>270</th>
+      <td>396</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['loveislove'], 'tweet_...</td>
+      <td>2015-08-21 13:52:26</td>
+      <td>tweets</td>
+      <td>[loveislove]</td>
+      <td>0x1d6edf</td>
+      <td>Humans are still Humans it dont matter what co...</td>
+      <td>humans are still humans it dont matter what co...</td>
+    </tr>
+    <tr>
+      <th>280</th>
+      <td>402</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x31d2...</td>
+      <td>2016-10-03 02:07:43</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x31d219</td>
+      <td>@MVPrinters Thanks you guys!!! &lt;LH&gt;</td>
+      <td>mvprinters thanks you guys lh</td>
+    </tr>
+    <tr>
+      <th>290</th>
+      <td>637</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['5aday', 'omega3', 'He...</td>
+      <td>2017-03-13 22:37:09</td>
+      <td>tweets</td>
+      <td>[5aday, omega3, HealthyFats, Fibre, protein, E...</td>
+      <td>0x2533ef</td>
+      <td>Lunch: baked beans, tinned sardines, wholemeal...</td>
+      <td>lunch baked beans tinned sardines wholemeal br...</td>
+    </tr>
+    <tr>
+      <th>300</th>
+      <td>838</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['coward', 'nevermypres...</td>
+      <td>2015-11-25 17:32:55</td>
+      <td>tweets</td>
+      <td>[coward, nevermypresident]</td>
+      <td>0x31dd5d</td>
+      <td>Interesting @realDonaldTrump waits until there...</td>
+      <td>interesting realdonaldtrump waits until there ...</td>
+    </tr>
+    <tr>
+      <th>310</th>
+      <td>1015</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['highschool'], 'tweet_...</td>
+      <td>2017-01-17 16:59:39</td>
+      <td>tweets</td>
+      <td>[highschool]</td>
+      <td>0x22d1ce</td>
+      <td>Starting high school in 3 days I'm so not read...</td>
+      <td>starting high school in days im so not ready i...</td>
+    </tr>
+    <tr>
+      <th>320</th>
+      <td>414</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['Awesome', 'AmericanMi...</td>
+      <td>2015-09-18 06:42:44</td>
+      <td>tweets</td>
+      <td>[Awesome, AmericanMilitary, TeamAmerica, WeSta...</td>
+      <td>0x1f44bd</td>
+      <td>@CBSNews That would be #Awesome! #AmericanMili...</td>
+      <td>cbsnews that would be awesome americanmilitary...</td>
+    </tr>
+    <tr>
+      <th>330</th>
+      <td>536</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x33de...</td>
+      <td>2016-04-04 21:29:12</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x33deba</td>
+      <td>today was a good fucking day &lt;LH&gt; 😂</td>
+      <td>today was a good fucking day lh</td>
+    </tr>
+    <tr>
+      <th>340</th>
+      <td>535</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['3rdSession', 'iLearn2...</td>
+      <td>2017-10-20 23:01:01</td>
+      <td>tweets</td>
+      <td>[3rdSession, iLearn2k17]</td>
+      <td>0x34a9ae</td>
+      <td>When you have students dealing with &lt;LH&gt; appro...</td>
+      <td>when you have students dealing with lh approac...</td>
+    </tr>
+    <tr>
+      <th>350</th>
+      <td>558</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x27c6...</td>
+      <td>2016-05-10 17:59:29</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x27c6e5</td>
+      <td>@timesofindia @MamataOfficial Look who's talki...</td>
+      <td>timesofindia mamataofficial look whos talking ...</td>
+    </tr>
+    <tr>
+      <th>360</th>
+      <td>70</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['GodisGood'], 'tweet_i...</td>
+      <td>2017-08-27 11:26:39</td>
+      <td>tweets</td>
+      <td>[GodisGood]</td>
+      <td>0x1d4f4d</td>
+      <td>God has blessed me with an amazing life! &lt;LH&gt; ...</td>
+      <td>god has blessed me with an amazing life lh god...</td>
+    </tr>
+    <tr>
+      <th>370</th>
+      <td>795</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['amor'], 'tweet_id': '...</td>
+      <td>2017-11-08 01:29:37</td>
+      <td>tweets</td>
+      <td>[amor]</td>
+      <td>0x3160c7</td>
+      <td>I have a closet w clothes,shoes, purses, 2 kid...</td>
+      <td>i have a closet w clothesshoes purses kids who...</td>
+    </tr>
+    <tr>
+      <th>380</th>
+      <td>470</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x273e...</td>
+      <td>2015-09-22 07:02:01</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x273eb4</td>
+      <td>@CumBubbleJesus Oddly enough I couldn't rememb...</td>
+      <td>cumbubblejesus oddly enough i couldnt remember...</td>
+    </tr>
+    <tr>
+      <th>390</th>
+      <td>399</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['witsstarSchools', 'da...</td>
+      <td>2016-11-25 12:05:53</td>
+      <td>tweets</td>
+      <td>[witsstarSchools, damelin_east_london]</td>
+      <td>0x211b97</td>
+      <td>#witsstarSchools, went 2 #damelin_east_london ...</td>
+      <td>witsstarschools went damelineastlondon worked ...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_DM_train</span> <span class="o">=</span> <span class="n">tweets_DM</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span><span class="n">left_on</span> <span class="o">=</span> <span class="s1">&#39;tweet.tweet_id&#39;</span><span class="p">,</span> <span class="n">right_on</span> <span class="o">=</span> <span class="s1">&#39;tweet_id&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_DM_train</span><span class="c1"># train dataset with text clean</span>
+
+<span class="n">tweets_DM_train</span><span class="p">[</span><span class="s1">&#39;text_clean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tweets_DM_train</span><span class="p">[</span><span class="s1">&#39;tweet.text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">clean_text</span><span class="p">)</span>
+<span class="n">tweets_DM_train</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="mi">10</span><span class="p">][:][</span><span class="mi">0</span><span class="p">:</span><span class="mi">40</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>_score</th>
+      <th>_index</th>
+      <th>_source</th>
+      <th>_crawldate</th>
+      <th>_type</th>
+      <th>tweet.hashtags</th>
+      <th>tweet.tweet_id</th>
+      <th>tweet.text</th>
+      <th>tweet_id</th>
+      <th>identification</th>
+      <th>text_clean</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>391</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['Snapchat'], 'tweet_id...</td>
+      <td>2015-05-23 11:42:47</td>
+      <td>tweets</td>
+      <td>[Snapchat]</td>
+      <td>0x376b20</td>
+      <td>People who post "add me on #Snapchat" must be ...</td>
+      <td>0x376b20</td>
+      <td>train</td>
+      <td>people who post add me on snapchat must be deh...</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>887</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['justgradstudentthings...</td>
+      <td>2015-08-11 16:22:15</td>
+      <td>tweets</td>
+      <td>[justgradstudentthings, ecology]</td>
+      <td>0x37a0a9</td>
+      <td>You know you research butterflies when predict...</td>
+      <td>0x37a0a9</td>
+      <td>train</td>
+      <td>you know you research butterflies when predict...</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>187</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2cab...</td>
+      <td>2015-05-14 14:48:43</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2cab19</td>
+      <td>I’ll never be half the man Pat Tillman was. &lt;LH&gt;</td>
+      <td>0x2cab19</td>
+      <td>train</td>
+      <td>i ll never be half the man pat tillman was lh</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>125</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['24hours', 'iPhoneX', ...</td>
+      <td>2016-01-21 05:22:22</td>
+      <td>tweets</td>
+      <td>[24hours, iPhoneX, Windians, clevelandindians,...</td>
+      <td>0x1ea076</td>
+      <td>Follow for &lt;LH&gt; next #24hours ? #iPhoneX #Wind...</td>
+      <td>0x1ea076</td>
+      <td>train</td>
+      <td>follow for lh next iphonex windians lh clevela...</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>786</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['way', 'truth', 'life'...</td>
+      <td>2017-10-17 15:00:14</td>
+      <td>tweets</td>
+      <td>[way, truth, life]</td>
+      <td>0x274427</td>
+      <td>&lt;LH&gt; is the #way, the #truth, and the #life</td>
+      <td>0x274427</td>
+      <td>train</td>
+      <td>lh is the way the truth and the life</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>939</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2a46...</td>
+      <td>2016-03-12 16:24:53</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2a468e</td>
+      <td>@sydbell1 @strut4cancer £50 donates to Macmill...</td>
+      <td>0x2a468e</td>
+      <td>train</td>
+      <td>donates to macmillan lh</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <td>372</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2498...</td>
+      <td>2017-10-14 09:51:30</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2498cf</td>
+      <td>I want that Frank Ocean phone cover &lt;LH&gt;</td>
+      <td>0x2498cf</td>
+      <td>train</td>
+      <td>i want that frank ocean phone cover lh</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <td>468</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['suicide'], 'tweet_id'...</td>
+      <td>2017-07-28 19:45:18</td>
+      <td>tweets</td>
+      <td>[suicide]</td>
+      <td>0x2dd4e0</td>
+      <td>Anyone wants to talk about anything, hit me up...</td>
+      <td>0x2dd4e0</td>
+      <td>train</td>
+      <td>anyone wants to talk about anything hit me up ...</td>
+    </tr>
+    <tr>
+      <th>80</th>
+      <td>823</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['STOP', 'CHANGE', 'DOU...</td>
+      <td>2016-10-20 17:22:40</td>
+      <td>tweets</td>
+      <td>[STOP, CHANGE, DOUBT]</td>
+      <td>0x2e8159</td>
+      <td>DON'T #STOP THE PROGRESSIVE #CHANGE &lt;LH&gt; IS MA...</td>
+      <td>0x2e8159</td>
+      <td>train</td>
+      <td>dont stop the progressive change lh is making ...</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>234</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['givehope', 'givetarir...</td>
+      <td>2015-09-20 03:07:36</td>
+      <td>tweets</td>
+      <td>[givehope, givetariro]</td>
+      <td>0x31dcef</td>
+      <td>Few things in the world are more powerful than...</td>
+      <td>0x31dcef</td>
+      <td>train</td>
+      <td>few things in the world are more powerful than...</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>978</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2b81...</td>
+      <td>2016-10-13 04:56:16</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2b81e7</td>
+      <td>@SGPT6 Hi SuzyQ.    if you like me; @StatusTih...</td>
+      <td>0x2b81e7</td>
+      <td>train</td>
+      <td>hi suzyq if you like me statustihange and sta...</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <td>22</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2e4b...</td>
+      <td>2016-05-20 04:23:06</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2e4ba5</td>
+      <td>to be &lt;LH&gt;  it's all we want, right?</td>
+      <td>0x2e4ba5</td>
+      <td>train</td>
+      <td>to be lh its all we want right</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>300</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['fdg17'], 'tweet_id': ...</td>
+      <td>2017-03-20 20:52:47</td>
+      <td>tweets</td>
+      <td>[fdg17]</td>
+      <td>0x2cdf9c</td>
+      <td>Here at #fdg17 &lt;LH&gt;</td>
+      <td>0x2cdf9c</td>
+      <td>train</td>
+      <td>here at lh</td>
+    </tr>
+    <tr>
+      <th>130</th>
+      <td>679</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x24e5...</td>
+      <td>2016-12-16 14:33:57</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x24e536</td>
+      <td>@NotSpeirs &lt;LH&gt; for Mia</td>
+      <td>0x24e536</td>
+      <td>train</td>
+      <td>notspeirs lh for mia</td>
+    </tr>
+    <tr>
+      <th>140</th>
+      <td>540</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['faketrumpfan', 'sad']...</td>
+      <td>2016-10-15 11:18:55</td>
+      <td>tweets</td>
+      <td>[faketrumpfan, sad]</td>
+      <td>0x2fe2de</td>
+      <td>@RobertMaguire_ @realDonaldTrump All its follo...</td>
+      <td>0x2fe2de</td>
+      <td>train</td>
+      <td>robertmaguire realdonaldtrump all its follower...</td>
+    </tr>
+    <tr>
+      <th>150</th>
+      <td>956</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x37e7...</td>
+      <td>2016-11-13 20:11:04</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x37e718</td>
+      <td>Okay, I'm done. Just needed to vent to myself ...</td>
+      <td>0x37e718</td>
+      <td>train</td>
+      <td>okay im done just needed to vent to myself at ...</td>
+    </tr>
+    <tr>
+      <th>160</th>
+      <td>845</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2b9b...</td>
+      <td>2017-06-01 22:10:42</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2b9b12</td>
+      <td>@albyg77 Thanks for following ~ glad to connec...</td>
+      <td>0x2b9b12</td>
+      <td>train</td>
+      <td>thanks for following glad to connect wishing ...</td>
+    </tr>
+    <tr>
+      <th>170</th>
+      <td>934</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x1cf3...</td>
+      <td>2017-06-28 07:13:49</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x1cf37f</td>
+      <td>Is there anything scarier at a restaraunt than...</td>
+      <td>0x1cf37f</td>
+      <td>train</td>
+      <td>is there anything scarier at a restaraunt than...</td>
+    </tr>
+    <tr>
+      <th>180</th>
+      <td>47</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x215f...</td>
+      <td>2017-11-25 15:33:23</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x215f4e</td>
+      <td>&lt;LH&gt; will always take to the place He wants yo...</td>
+      <td>0x215f4e</td>
+      <td>train</td>
+      <td>lh will always take to the place he wants you ...</td>
+    </tr>
+    <tr>
+      <th>190</th>
+      <td>185</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['alive', 'livetheglory...</td>
+      <td>2016-04-08 18:10:43</td>
+      <td>tweets</td>
+      <td>[alive, livetheglory]</td>
+      <td>0x2dfcb1</td>
+      <td>Some people will just never get it smh #alive&amp;...</td>
+      <td>0x2dfcb1</td>
+      <td>train</td>
+      <td>some people will just never get it smh alivewe...</td>
+    </tr>
+    <tr>
+      <th>200</th>
+      <td>149</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x1d41...</td>
+      <td>2016-10-14 10:54:41</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x1d41f9</td>
+      <td>@Eyes_of_justice Well only &lt;LH&gt; off 1/2 doing ...</td>
+      <td>0x1d41f9</td>
+      <td>train</td>
+      <td>eyesofjustice well only lh off doing something...</td>
+    </tr>
+    <tr>
+      <th>210</th>
+      <td>301</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2c59...</td>
+      <td>2017-08-09 22:08:49</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2c5998</td>
+      <td>@hiAmanHere Lol hahah.. &lt;LH&gt; that one</td>
+      <td>0x2c5998</td>
+      <td>train</td>
+      <td>hiamanhere lol hahah lh that one</td>
+    </tr>
+    <tr>
+      <th>220</th>
+      <td>621</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['FriYay'], 'tweet_id':...</td>
+      <td>2016-09-20 13:42:43</td>
+      <td>tweets</td>
+      <td>[FriYay]</td>
+      <td>0x1da7a0</td>
+      <td>Thank &lt;LH&gt; it's #FriYay.. 😍</td>
+      <td>0x1da7a0</td>
+      <td>train</td>
+      <td>thank lh its friyay</td>
+    </tr>
+    <tr>
+      <th>230</th>
+      <td>27</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['queer'], 'tweet_id': ...</td>
+      <td>2015-01-10 21:07:06</td>
+      <td>tweets</td>
+      <td>[queer]</td>
+      <td>0x31ae5e</td>
+      <td>Ahhhh I feel so free and happy queer today, it...</td>
+      <td>0x31ae5e</td>
+      <td>train</td>
+      <td>ahhhh i feel so free and happy queer today its...</td>
+    </tr>
+    <tr>
+      <th>240</th>
+      <td>871</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['nomorequitting'], 'tw...</td>
+      <td>2017-01-26 15:11:11</td>
+      <td>tweets</td>
+      <td>[nomorequitting]</td>
+      <td>0x247f72</td>
+      <td>Toxicity is such a great album to workout too ...</td>
+      <td>0x247f72</td>
+      <td>train</td>
+      <td>toxicity is such a great album to workout too ...</td>
+    </tr>
+    <tr>
+      <th>250</th>
+      <td>710</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['Todd', 'Believe', 'Go...</td>
+      <td>2015-05-19 04:19:40</td>
+      <td>tweets</td>
+      <td>[Todd, Believe, Godisstillgood]</td>
+      <td>0x3020a5</td>
+      <td>"When you have no reason (world standard) to b...</td>
+      <td>0x3020a5</td>
+      <td>train</td>
+      <td>when you have no reason world standard to beli...</td>
+    </tr>
+    <tr>
+      <th>260</th>
+      <td>854</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x212e...</td>
+      <td>2017-11-11 16:13:17</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x212e04</td>
+      <td>Be grateful for all you have &lt;LH&gt;</td>
+      <td>0x212e04</td>
+      <td>train</td>
+      <td>be grateful for all you have lh</td>
+    </tr>
+    <tr>
+      <th>270</th>
+      <td>519</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x230f...</td>
+      <td>2016-04-18 10:57:23</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x230fa3</td>
+      <td>The those bisexual stream  &lt;LH&gt; &lt;LH&gt; &lt;LH&gt;</td>
+      <td>0x230fa3</td>
+      <td>train</td>
+      <td>the those bisexual stream lh lh lh</td>
+    </tr>
+    <tr>
+      <th>280</th>
+      <td>563</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['awesome'], 'tweet_id'...</td>
+      <td>2016-11-10 01:58:44</td>
+      <td>tweets</td>
+      <td>[awesome]</td>
+      <td>0x2d5f29</td>
+      <td>@Makerspaces_com OMG!!! Must have!! #awesome🧞‍♂️</td>
+      <td>0x2d5f29</td>
+      <td>train</td>
+      <td>makerspacescom omg must have awesome</td>
+    </tr>
+    <tr>
+      <th>290</th>
+      <td>70</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['GodisGood'], 'tweet_i...</td>
+      <td>2017-08-27 11:26:39</td>
+      <td>tweets</td>
+      <td>[GodisGood]</td>
+      <td>0x1d4f4d</td>
+      <td>God has blessed me with an amazing life! &lt;LH&gt; ...</td>
+      <td>0x1d4f4d</td>
+      <td>train</td>
+      <td>god has blessed me with an amazing life lh god...</td>
+    </tr>
+    <tr>
+      <th>300</th>
+      <td>601</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['TrentonNJ', 'Trump', ...</td>
+      <td>2015-07-10 11:08:57</td>
+      <td>tweets</td>
+      <td>[TrentonNJ, Trump, positive]</td>
+      <td>0x206ca7</td>
+      <td>I grew up in #TrentonNJ. I knew about #Trump l...</td>
+      <td>0x206ca7</td>
+      <td>train</td>
+      <td>i grew up in trentonnj i knew about trump long...</td>
+    </tr>
+    <tr>
+      <th>310</th>
+      <td>525</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2847...</td>
+      <td>2017-04-21 09:51:57</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x28474e</td>
+      <td>@DonaldJTrumpJr I can't believe you are even t...</td>
+      <td>0x28474e</td>
+      <td>train</td>
+      <td>donaldjtrumpjr i cant believe you are even twe...</td>
+    </tr>
+    <tr>
+      <th>320</th>
+      <td>731</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['Living', 'TuesdayMoti...</td>
+      <td>2016-04-04 07:10:39</td>
+      <td>tweets</td>
+      <td>[Living, TuesdayMotivation]</td>
+      <td>0x26140c</td>
+      <td>Had a great time with my cousin, and grandma!!...</td>
+      <td>0x26140c</td>
+      <td>train</td>
+      <td>had a great time with my cousin and grandma li...</td>
+    </tr>
+    <tr>
+      <th>330</th>
+      <td>16</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['Angel', 'Down', 'HeLi...</td>
+      <td>2016-07-20 08:24:17</td>
+      <td>tweets</td>
+      <td>[Angel, Down, HeLikeThat]</td>
+      <td>0x2e4af6</td>
+      <td>@NielsenCurrent #Angel should've been the lead...</td>
+      <td>0x2e4af6</td>
+      <td>train</td>
+      <td>nielsencurrent angel shouldve been the lead si...</td>
+    </tr>
+    <tr>
+      <th>340</th>
+      <td>799</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['SirMo', 'BoS'], 'twee...</td>
+      <td>2017-12-08 20:22:17</td>
+      <td>tweets</td>
+      <td>[SirMo, BoS]</td>
+      <td>0x2270a9</td>
+      <td>@BookOShame Congratulations #SirMo Farah on su...</td>
+      <td>0x2270a9</td>
+      <td>train</td>
+      <td>bookoshame congratulations sirmo farah on such...</td>
+    </tr>
+    <tr>
+      <th>350</th>
+      <td>24</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['Awarapan'], 'tweet_id...</td>
+      <td>2016-02-22 17:45:43</td>
+      <td>tweets</td>
+      <td>[Awarapan]</td>
+      <td>0x30ebf7</td>
+      <td>Listening to Mahiya(Remix) by @annie_khalid 💜 ...</td>
+      <td>0x30ebf7</td>
+      <td>train</td>
+      <td>listening to mahiyaremix by anniekhalid and re...</td>
+    </tr>
+    <tr>
+      <th>360</th>
+      <td>130</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x250b...</td>
+      <td>2017-04-16 08:14:29</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x250b23</td>
+      <td>@erperkin This is &lt;LH&gt;</td>
+      <td>0x250b23</td>
+      <td>train</td>
+      <td>erperkin this is lh</td>
+    </tr>
+    <tr>
+      <th>370</th>
+      <td>907</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['GODIsLove', 'GODsPeac...</td>
+      <td>2015-06-28 07:30:26</td>
+      <td>tweets</td>
+      <td>[GODIsLove, GODsPeace]</td>
+      <td>0x2f1df5</td>
+      <td>I love it when I see the hand of GOD in my def...</td>
+      <td>0x2f1df5</td>
+      <td>train</td>
+      <td>i love it when i see the hand of god in my def...</td>
+    </tr>
+    <tr>
+      <th>380</th>
+      <td>953</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['Wild'], 'tweet_id': '...</td>
+      <td>2015-12-22 17:35:16</td>
+      <td>tweets</td>
+      <td>[Wild]</td>
+      <td>0x1ea62b</td>
+      <td>Ain't got no respect for Your child or Your se...</td>
+      <td>0x1ea62b</td>
+      <td>train</td>
+      <td>aint got no respect for your child or your sel...</td>
+    </tr>
+    <tr>
+      <th>390</th>
+      <td>191</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x250e...</td>
+      <td>2015-05-05 10:01:52</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x250ed6</td>
+      <td>@immrfabulous @FedEx Yup. Happened to me last ...</td>
+      <td>0x250ed6</td>
+      <td>train</td>
+      <td>immrfabulous fedex yup happened to me last wee...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_DM_train</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(1455563, 11)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_DM_test</span> <span class="o">=</span> <span class="n">tweets_DM</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span><span class="n">left_on</span> <span class="o">=</span> <span class="s1">&#39;tweet.tweet_id&#39;</span><span class="p">,</span> <span class="n">right_on</span> <span class="o">=</span> <span class="s1">&#39;tweet_id&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_DM_test</span><span class="p">[</span><span class="s1">&#39;text_clean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tweets_DM_test</span><span class="p">[</span><span class="s1">&#39;tweet.text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">clean_text</span><span class="p">)</span>
+<span class="n">tweets_DM_test</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="mi">10</span><span class="p">][:][</span><span class="mi">0</span><span class="p">:</span><span class="mi">40</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>_score</th>
+      <th>_index</th>
+      <th>_source</th>
+      <th>_crawldate</th>
+      <th>_type</th>
+      <th>tweet.hashtags</th>
+      <th>tweet.tweet_id</th>
+      <th>tweet.text</th>
+      <th>tweet_id</th>
+      <th>identification</th>
+      <th>text_clean</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>232</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['bibleverse'], 'tweet_...</td>
+      <td>2017-12-25 04:39:20</td>
+      <td>tweets</td>
+      <td>[bibleverse]</td>
+      <td>0x28b412</td>
+      <td>Confident of your obedience, I write to you, k...</td>
+      <td>0x28b412</td>
+      <td>test</td>
+      <td>confident of your obedience i write to you kno...</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>112</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x25dc...</td>
+      <td>2015-12-07 06:18:42</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x25dcd8</td>
+      <td>Nothing like the delicious taste of coffee and...</td>
+      <td>0x25dcd8</td>
+      <td>test</td>
+      <td>nothing like the delicious taste of coffee and...</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>540</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x245e...</td>
+      <td>2016-07-21 05:34:13</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x245e5b</td>
+      <td>@realDonaldTrump It's been on the news all day...</td>
+      <td>0x245e5b</td>
+      <td>test</td>
+      <td>realdonaldtrump its been on the news all day u...</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>369</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['PuertoRico'], 'tweet_...</td>
+      <td>2016-08-01 18:10:02</td>
+      <td>tweets</td>
+      <td>[PuertoRico]</td>
+      <td>0x1f0f0d</td>
+      <td>@realDonaldTrump Other places have been hit by...</td>
+      <td>0x1f0f0d</td>
+      <td>test</td>
+      <td>realdonaldtrump other places have been hit by ...</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>573</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['GCCC', 'SCMP', 'yyc',...</td>
+      <td>2015-08-02 22:33:24</td>
+      <td>tweets</td>
+      <td>[GCCC, SCMP, yyc, certification, communications]</td>
+      <td>0x3186fc</td>
+      <td>Well, I did it. I registered to write the @IAB...</td>
+      <td>0x3186fc</td>
+      <td>test</td>
+      <td>well i did it i registered to write the iabc g...</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>40</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2f07...</td>
+      <td>2015-07-09 10:15:34</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2f07b4</td>
+      <td>When your husband forgots  to turn his alarm c...</td>
+      <td>0x2f07b4</td>
+      <td>test</td>
+      <td>when your husband forgots to turn his alarm cl...</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <td>929</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['bored', 'dm'], 'tweet...</td>
+      <td>2015-02-02 02:35:40</td>
+      <td>tweets</td>
+      <td>[bored, dm]</td>
+      <td>0x2940be</td>
+      <td>Someone anyone hit my  DM ’s...  I’m bored #bo...</td>
+      <td>0x2940be</td>
+      <td>test</td>
+      <td>someone anyone hit my dm s i m bored bored dm lh</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <td>627</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2041...</td>
+      <td>2015-06-27 11:05:21</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x20410d</td>
+      <td>Just got invited to a kids birthday party by t...</td>
+      <td>0x20410d</td>
+      <td>test</td>
+      <td>just got invited to a kids birthday party by t...</td>
+    </tr>
+    <tr>
+      <th>80</th>
+      <td>470</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x273e...</td>
+      <td>2015-09-22 07:02:01</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x273eb4</td>
+      <td>@CumBubbleJesus Oddly enough I couldn't rememb...</td>
+      <td>0x273eb4</td>
+      <td>test</td>
+      <td>cumbubblejesus oddly enough i couldnt remember...</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>130</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['FiEurope2017'], 'twee...</td>
+      <td>2017-09-24 23:35:30</td>
+      <td>tweets</td>
+      <td>[FiEurope2017]</td>
+      <td>0x2d46e2</td>
+      <td>#FiEurope2017 is about to open and we can't wa...</td>
+      <td>0x2d46e2</td>
+      <td>test</td>
+      <td>is about to open and we cant wait come say hi...</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>598</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2051...</td>
+      <td>2015-11-02 22:32:25</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2051e7</td>
+      <td>Diseases are molecules misbehaving; the basic ...</td>
+      <td>0x2051e7</td>
+      <td>test</td>
+      <td>diseases are molecules misbehaving the basic r...</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <td>315</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2ef6...</td>
+      <td>2015-01-09 05:33:21</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2ef628</td>
+      <td>“New day, new hopes, new life!!”  &lt;LH&gt;</td>
+      <td>0x2ef628</td>
+      <td>test</td>
+      <td>new day new hopes new life lh</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>403</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2258...</td>
+      <td>2015-05-09 09:34:06</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x22588d</td>
+      <td>I just... i just dont even know anymore. &lt;LH&gt;</td>
+      <td>0x22588d</td>
+      <td>test</td>
+      <td>i just i just dont even know anymore lh</td>
+    </tr>
+    <tr>
+      <th>130</th>
+      <td>778</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x32bb...</td>
+      <td>2015-10-22 06:48:01</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x32bba6</td>
+      <td>@DonaldJTrumpJr He claims to be worth $10 bill...</td>
+      <td>0x32bba6</td>
+      <td>test</td>
+      <td>donaldjtrumpjr he claims to be worth billion a...</td>
+    </tr>
+    <tr>
+      <th>140</th>
+      <td>105</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x34a1...</td>
+      <td>2015-08-15 05:38:52</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x34a1c9</td>
+      <td>Reading quiz a success! Proud of my babies...t...</td>
+      <td>0x34a1c9</td>
+      <td>test</td>
+      <td>reading quiz a success proud of my babiesthey ...</td>
+    </tr>
+    <tr>
+      <th>150</th>
+      <td>901</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x211e...</td>
+      <td>2016-01-02 14:10:51</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x211e20</td>
+      <td>How are they gonna have Hercules on Netflix bu...</td>
+      <td>0x211e20</td>
+      <td>test</td>
+      <td>how are they gonna have hercules on netflix bu...</td>
+    </tr>
+    <tr>
+      <th>160</th>
+      <td>188</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2fce...</td>
+      <td>2017-01-06 14:29:53</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2fcea3</td>
+      <td>EVERY TIME I GET DONUT HOLES FROM DUNKIN DONUT...</td>
+      <td>0x2fcea3</td>
+      <td>test</td>
+      <td>every time i get donut holes from dunkin donut...</td>
+    </tr>
+    <tr>
+      <th>170</th>
+      <td>992</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x212a...</td>
+      <td>2015-02-17 17:16:30</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x212a8e</td>
+      <td>@AintArmed @roaa_sabry1 😍😍😍😍 can give my life ...</td>
+      <td>0x212a8e</td>
+      <td>test</td>
+      <td>aintarmed can give my life up fore someone lik...</td>
+    </tr>
+    <tr>
+      <th>180</th>
+      <td>24</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x211c...</td>
+      <td>2016-12-14 08:40:12</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x211c1d</td>
+      <td>My love @summerleanne12 made me an amazing bre...</td>
+      <td>0x211c1d</td>
+      <td>test</td>
+      <td>my love made me an amazing breakfast this morn...</td>
+    </tr>
+    <tr>
+      <th>190</th>
+      <td>757</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['ThisIsLife'], 'tweet_...</td>
+      <td>2015-02-28 23:55:58</td>
+      <td>tweets</td>
+      <td>[ThisIsLife]</td>
+      <td>0x2f7e36</td>
+      <td>#ThisIsLife wow what an amazing episode. @lisa...</td>
+      <td>0x2f7e36</td>
+      <td>test</td>
+      <td>thisislife wow what an amazing episode lisalin...</td>
+    </tr>
+    <tr>
+      <th>200</th>
+      <td>589</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2fa4...</td>
+      <td>2015-01-11 16:25:23</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2fa446</td>
+      <td>@jerryghazal  and Here's another yes from me &lt;LH&gt;</td>
+      <td>0x2fa446</td>
+      <td>test</td>
+      <td>jerryghazal and heres another yes from me lh</td>
+    </tr>
+    <tr>
+      <th>210</th>
+      <td>680</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2f03...</td>
+      <td>2015-01-14 16:59:04</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2f038e</td>
+      <td>She one asked me money for an iPod I dropped b...</td>
+      <td>0x2f038e</td>
+      <td>test</td>
+      <td>she one asked me money for an ipod i dropped b...</td>
+    </tr>
+    <tr>
+      <th>220</th>
+      <td>827</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x22a6...</td>
+      <td>2016-05-09 14:10:32</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x22a61b</td>
+      <td>Never grow a wishbone daughter, where your bac...</td>
+      <td>0x22a61b</td>
+      <td>test</td>
+      <td>never grow a wishbone daughter where your back...</td>
+    </tr>
+    <tr>
+      <th>230</th>
+      <td>325</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x1f7c...</td>
+      <td>2017-08-01 15:41:13</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x1f7c14</td>
+      <td>Really @NintendoAmerica? No local multiplayer ...</td>
+      <td>0x1f7c14</td>
+      <td>test</td>
+      <td>really nintendoamerica no local multiplayer fo...</td>
+    </tr>
+    <tr>
+      <th>240</th>
+      <td>915</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x382e...</td>
+      <td>2015-12-09 14:13:42</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x382e5c</td>
+      <td>When hope is low, faith has the ability to bui...</td>
+      <td>0x382e5c</td>
+      <td>test</td>
+      <td>when hope is low faith has the ability to buil...</td>
+    </tr>
+    <tr>
+      <th>250</th>
+      <td>621</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['DONE', 'BucketList', ...</td>
+      <td>2016-12-23 05:10:57</td>
+      <td>tweets</td>
+      <td>[DONE, BucketList, nomoredating]</td>
+      <td>0x23b3e0</td>
+      <td>All I wanted was someone to cross my bucket li...</td>
+      <td>0x23b3e0</td>
+      <td>test</td>
+      <td>all i wanted was someone to cross my bucket li...</td>
+    </tr>
+    <tr>
+      <th>260</th>
+      <td>641</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2dee...</td>
+      <td>2017-12-16 04:44:02</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2deef9</td>
+      <td>I still remember other people's IDs and mine f...</td>
+      <td>0x2deef9</td>
+      <td>test</td>
+      <td>i still remember other peoples ids and mine fr...</td>
+    </tr>
+    <tr>
+      <th>270</th>
+      <td>626</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2ee3...</td>
+      <td>2016-01-08 21:02:03</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2ee360</td>
+      <td>@IvankaTrump 1:1 Ya know. These are UR DADS pp...</td>
+      <td>0x2ee360</td>
+      <td>test</td>
+      <td>ivankatrump ya know these are ur dads ppl plai...</td>
+    </tr>
+    <tr>
+      <th>280</th>
+      <td>21</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x3457...</td>
+      <td>2017-09-24 22:43:39</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x345771</td>
+      <td>@TomArnold even in the miami heat, donny still...</td>
+      <td>0x345771</td>
+      <td>test</td>
+      <td>tomarnold even in the miami heat donny still h...</td>
+    </tr>
+    <tr>
+      <th>290</th>
+      <td>147</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x22fd...</td>
+      <td>2017-05-05 19:34:15</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x22fd1e</td>
+      <td>@therunchat Going down! With summer temps, it'...</td>
+      <td>0x22fd1e</td>
+      <td>test</td>
+      <td>therunchat going down with summer temps its be...</td>
+    </tr>
+    <tr>
+      <th>300</th>
+      <td>889</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['LeoSzn'], 'tweet_id':...</td>
+      <td>2015-07-08 15:12:15</td>
+      <td>tweets</td>
+      <td>[LeoSzn]</td>
+      <td>0x2c29f7</td>
+      <td>... 23 years young in 9 days 🙌🏽 #LeoSzn &lt;LH&gt;</td>
+      <td>0x2c29f7</td>
+      <td>test</td>
+      <td>years young in days leoszn lh</td>
+    </tr>
+    <tr>
+      <th>310</th>
+      <td>68</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['truestory', 'givenofu...</td>
+      <td>2017-12-28 18:54:43</td>
+      <td>tweets</td>
+      <td>[truestory, givenofucks]</td>
+      <td>0x32d785</td>
+      <td>@GiantAKS #truestory ...and this is why I love...</td>
+      <td>0x32d785</td>
+      <td>test</td>
+      <td>giantaks truestory and this is why i love you ...</td>
+    </tr>
+    <tr>
+      <th>320</th>
+      <td>486</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['IPhone'], 'tweet_id':...</td>
+      <td>2016-07-10 09:58:24</td>
+      <td>tweets</td>
+      <td>[IPhone]</td>
+      <td>0x33149e</td>
+      <td>I'm not sure why I have to turn on the TV just...</td>
+      <td>0x33149e</td>
+      <td>test</td>
+      <td>im not sure why i have to turn on the tv just ...</td>
+    </tr>
+    <tr>
+      <th>330</th>
+      <td>401</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['funfit'], 'tweet_id':...</td>
+      <td>2016-04-01 08:10:32</td>
+      <td>tweets</td>
+      <td>[funfit]</td>
+      <td>0x1daad4</td>
+      <td>Fun Xmas event at Central Street Infants today...</td>
+      <td>0x1daad4</td>
+      <td>test</td>
+      <td>fun xmas event at central street infants today...</td>
+    </tr>
+    <tr>
+      <th>340</th>
+      <td>528</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['motivation', 'itcomes...</td>
+      <td>2017-05-03 16:40:10</td>
+      <td>tweets</td>
+      <td>[motivation, itcomeswithage]</td>
+      <td>0x1fef4f</td>
+      <td>⭐️ When you know yourself, you are empowered. ...</td>
+      <td>0x1fef4f</td>
+      <td>test</td>
+      <td>when you know yourself you are empowered when...</td>
+    </tr>
+    <tr>
+      <th>350</th>
+      <td>402</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x25e3...</td>
+      <td>2017-10-13 08:31:19</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x25e35d</td>
+      <td>"But those mine enemies, which would not that ...</td>
+      <td>0x25e35d</td>
+      <td>test</td>
+      <td>but those mine enemies which would not that i ...</td>
+    </tr>
+    <tr>
+      <th>360</th>
+      <td>602</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['OnHold'], 'tweet_id':...</td>
+      <td>2015-11-01 07:15:09</td>
+      <td>tweets</td>
+      <td>[OnHold]</td>
+      <td>0x28c4b0</td>
+      <td>After all this happen i guess whatever i want ...</td>
+      <td>0x28c4b0</td>
+      <td>test</td>
+      <td>after all this happen i guess whatever i want ...</td>
+    </tr>
+    <tr>
+      <th>370</th>
+      <td>763</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x2ab9...</td>
+      <td>2015-09-02 07:41:59</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x2ab988</td>
+      <td>@susannah_kim @afterbuzztv @MonseBolanos Bad t...</td>
+      <td>0x2ab988</td>
+      <td>test</td>
+      <td>susannahkim afterbuzztv monsebolanos bad to he...</td>
+    </tr>
+    <tr>
+      <th>380</th>
+      <td>464</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': ['Valueadd'], 'tweet_id...</td>
+      <td>2017-09-08 20:12:59</td>
+      <td>tweets</td>
+      <td>[Valueadd]</td>
+      <td>0x3419bf</td>
+      <td>@keithdyer Searingly hot takes on the *new* sh...</td>
+      <td>0x3419bf</td>
+      <td>test</td>
+      <td>keithdyer searingly hot takes on the new shape...</td>
+    </tr>
+    <tr>
+      <th>390</th>
+      <td>924</td>
+      <td>hashtag_tweets</td>
+      <td>{'tweet': {'hashtags': [], 'tweet_id': '0x30fb...</td>
+      <td>2015-08-03 16:33:35</td>
+      <td>tweets</td>
+      <td>[]</td>
+      <td>0x30fbe4</td>
+      <td>@AmyChu @DynamiteComics Got Dangit. I was late...</td>
+      <td>0x30fbe4</td>
+      <td>test</td>
+      <td>amychu dynamitecomics got dangit i was late fo...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_DM_test</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(411972, 11)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+
+<span class="c1"># build analyzers (bag-of-words)</span>
+<span class="n">BOW_200</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">max_features</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">)</span> 
+
+<span class="c1"># apply analyzer to training data</span>
+<span class="n">BOW_200</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">tweets_DM_train</span><span class="p">[</span><span class="s1">&#39;text_clean&#39;</span><span class="p">])</span>
+
+<span class="n">train_data_BOW_features_200</span> <span class="o">=</span> <span class="n">BOW_200</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">tweets_DM_train</span><span class="p">[</span><span class="s1">&#39;text_clean&#39;</span><span class="p">])</span>
+
+<span class="c1">## check dimension</span>
+<span class="n">train_data_BOW_features_200</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">~\AppData\Local\Temp/ipykernel_11836/3103766485.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">      3</span> 
+<span class="ansi-green-fg">      4</span> <span class="ansi-red-intense-fg ansi-bold"># build analyzers (bag-of-words)</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 5</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>BOW_200 <span class="ansi-yellow-intense-fg ansi-bold">=</span> CountVectorizer<span class="ansi-yellow-intense-fg ansi-bold">(</span>max_features<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-cyan-intense-fg ansi-bold">200</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> tokenizer<span class="ansi-yellow-intense-fg ansi-bold">=</span>nltk<span class="ansi-yellow-intense-fg ansi-bold">.</span>word_tokenize<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">      6</span> 
+<span class="ansi-green-fg">      7</span> <span class="ansi-red-intense-fg ansi-bold"># apply analyzer to training data</span>
+
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;nltk&#39; is not defined</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_data_BOW_features_200</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#.toarray() is used to convert list to an array; what if the dataset is too big</span>
+<span class="c1"># change max_featres from 500 to 250 and it works!!</span>
+<span class="n">train_data_BOW_features_200</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">feature_names_200</span> <span class="o">=</span> <span class="n">BOW_200</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+<span class="n">feature_names_200</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">110</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">y_train</span> <span class="o">=</span> <span class="n">tweets_DM</span> <span class="p">[</span><span class="s1">&#39;emotion&#39;</span><span class="p">]</span>
+<span class="n">y_train</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_data_BOW_features_200</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">tweets_df</span><span class="p">[</span><span class="s1">&#39;_source&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="c1"># extract text coulum to be list obj</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">json_normalize</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span> <span class="c1"># normalize data</span>
+<span class="n">tweets_DM_test</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">tweets_df</span><span class="p">,</span> <span class="n">df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># concat them again</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tweets_DM_test</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">testset</span> <span class="o">=</span> <span class="n">df_test</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">tweets_DM_test</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span><span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;tweet_id&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;tweet.tweet_id&#39;</span><span class="p">)</span>
+<span class="n">testset</span><span class="o">=</span><span class="n">testset</span><span class="p">[</span><span class="s1">&#39;tweet.text&#39;</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">testset</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">testset</span> <span class="o">=</span> <span class="n">testset</span><span class="p">[</span><span class="s1">&#39;tweet.text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">clean_text</span><span class="p">)</span>
+<span class="n">testset</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="mi">10</span><span class="p">][:][</span><span class="mi">0</span><span class="p">:</span><span class="mi">40</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># build analyzers (bag-of-words)</span>
+<span class="n">test_BOW_200</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">max_features</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">)</span> 
+
+<span class="c1"># apply analyzer to training data</span>
+<span class="n">test_BOW_200</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">testset</span><span class="p">[</span><span class="s1">&#39;tweet.text&#39;</span><span class="p">])</span>
+
+
+<span class="n">test_BOW_200_features</span> <span class="o">=</span> <span class="n">test_BOW_200</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">testset</span><span class="p">[</span><span class="s1">&#39;tweet.text&#39;</span><span class="p">])</span>
+
+<span class="c1">## check dimension</span>
+<span class="n">test_BOW_200_features</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_BOW_200_features</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="tokenize-test-set">tokenize test set<a class="anchor-link" href="#tokenize-test-set"> </a></h1><h1 id="build-analyzers-(bag-of-words)">build analyzers (bag-of-words)<a class="anchor-link" href="#build-analyzers-(bag-of-words)"> </a></h1><p>y_train2 = CountVectorizer(max_features=200, tokenizer=nltk.word_tokenize)</p>
+<h1 id="apply-analyzer-to-training-data">apply analyzer to training data<a class="anchor-link" href="#apply-analyzer-to-training-data"> </a></h1><p>y_train2.fit(y_train)</p>
+<p>y_train2_features = test_BOW_200.transform(y_train)</p>
+<h2 id="check-dimension">check dimension<a class="anchor-link" href="#check-dimension"> </a></h2><p>y_train2</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>y_train2.toarray()</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span><span class="p">,</span> <span class="n">GaussianNB</span><span class="p">,</span> <span class="n">BernoulliNB</span>
+<span class="n">naivebay</span> <span class="o">=</span> <span class="n">BernoulliNB</span><span class="p">()</span>
+<span class="n">naive</span><span class="o">=</span><span class="n">naivebay</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_data_BOW_features_200</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">naive</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_BOW_200_features</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">result</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;emotion&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test</span><span class="p">[[</span><span class="s1">&#39;tweet_id&#39;</span><span class="p">,</span><span class="s1">&#39;emotion&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;sixth&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/leesuwonthan/2022/06/27/Lab2_sentiment_analysis.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/leesuwonthan/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/leesuwonthan/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/leesuwonthan/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>WELCOME TO DATA SCIENCE PORTFOLIO WHERE MY JOURNEY BEGINS</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
