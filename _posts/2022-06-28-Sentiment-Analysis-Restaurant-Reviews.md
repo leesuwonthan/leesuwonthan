@@ -34,13 +34,10 @@ import re
 df = pd.read_csv('Reviews.csv')
 ```
 
-
 ```python
 #see the sample of dataset
 df.sample(100000)
 ```
-
-
 
 
 <div>
@@ -256,7 +253,6 @@ df.shape
 df0 = df.sample(frac = 0.20) # taking 20% of dataset
 df0 = df0[['Id','ProfileName','Score', 'Time', 'Summary', 'Text']] # query only some attribute
 df0.head()
-
 ```
 
 
