@@ -11,6 +11,17 @@
         
     
   
+    
+        ,"post1": {
+            "title": "My Title",
+            "content": "title: 🚀 Demo notebook description: Simple notebook with widgets demo params: year: input: slider label: Please select the year min: 2000 max: 2100 value: 2022 greetings: input: select label: Please select greetings value: Hello choices: [Cześć, Hello, Hi, Ciao, Salut] name: input: text label: What is your name? value: Piotr &#128640; Demo notebook with greetings &#128075; . year = 2022 greetings = &quot;Hello&quot; name = &quot;Piotr&quot; . print(f&quot;{greetings} {name} in {year}&quot;) .",
+            "url": "https://leesuwonthan.github.io/leesuwonthan/fastpages/jupyter/2022/06/27/demo.html",
+            "relUrl": "/fastpages/jupyter/2022/06/27/demo.html",
+            "date": " • Jun 27, 2022"
+        }
+        
+    
+  
 
   
   
