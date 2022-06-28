@@ -1,4 +1,3 @@
----
 # "My Project_1"
 > "This project is part of my coursework in the university.
 Here, I performed sentiment analysis by using a pre-trained model to predict the sentiment that indicate whether the customer being satisfied or not from the service. I will be working with a data set, Amazon Fine Food Reviews, which provide attribute such as review comment, summary, score, profilename etc. With that, I might choose only some atrribute and split them into training set and testing set. In the end, I would show the accuracy rate of my model and some challenge for develop the efficientcy of model in the future."
@@ -8,7 +7,7 @@ Here, I performed sentiment analysis by using a pre-trained model to predict the
 - comments: false
 - author: Jaden Lee
 - categories: [sentiment_analysis,python,reviews,python]
----
+
 
 
 
@@ -58,7 +57,6 @@ df.sample(100000)
     .dataframe thead th {
         text-align: right;
     }
-
 </style>
 <table border="1" class="dataframe">
   <thead>
