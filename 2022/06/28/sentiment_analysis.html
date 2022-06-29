@@ -10,15 +10,15 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="“Sentiment Analysis”¶" />
 <meta property="og:description" content="“Sentiment Analysis”¶" />
-<link rel="canonical" href="https://leesuwonthan.github.io/leesuwonthan/2022/06/27/sentiment_analysis.html" />
-<meta property="og:url" content="https://leesuwonthan.github.io/leesuwonthan/2022/06/27/sentiment_analysis.html" />
+<link rel="canonical" href="https://leesuwonthan.github.io/leesuwonthan/2022/06/28/sentiment_analysis.html" />
+<meta property="og:url" content="https://leesuwonthan.github.io/leesuwonthan/2022/06/28/sentiment_analysis.html" />
 <meta property="og:site_name" content="Jaden Lee" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-06-27T00:00:00-05:00" />
+<meta property="article:published_time" content="2022-06-28T00:00:00-05:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Sentiment_analysis" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-06-27T00:00:00-05:00","datePublished":"2022-06-27T00:00:00-05:00","description":"“Sentiment Analysis”¶","headline":"Sentiment_analysis","mainEntityOfPage":{"@type":"WebPage","@id":"https://leesuwonthan.github.io/leesuwonthan/2022/06/27/sentiment_analysis.html"},"url":"https://leesuwonthan.github.io/leesuwonthan/2022/06/27/sentiment_analysis.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-06-28T00:00:00-05:00","datePublished":"2022-06-28T00:00:00-05:00","description":"“Sentiment Analysis”¶","headline":"Sentiment_analysis","mainEntityOfPage":{"@type":"WebPage","@id":"https://leesuwonthan.github.io/leesuwonthan/2022/06/28/sentiment_analysis.html"},"url":"https://leesuwonthan.github.io/leesuwonthan/2022/06/28/sentiment_analysis.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/leesuwonthan/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://leesuwonthan.github.io/leesuwonthan/feed.xml" title="Jaden Lee" /><link rel="shortcut icon" type="image/x-icon" href="/leesuwonthan/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -73,8 +73,8 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Sentiment_analysis</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-27T00:00:00-05:00" itemprop="datePublished">
-        Jun 27, 2022
+    <h1 class="post-title p-name" itemprop="name headline">Sentiment_analysis</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-06-28T00:00:00-05:00" itemprop="datePublished">
+        Jun 28, 2022
       </time>
        • <span class="read-time" title="Estimated read time">
     
@@ -810,7 +810,7 @@ window.onload = wrap_img;
 
 <p>#NOTE: The marjority of the plot is dominated by the reviews with Score 5, and this could lead to imbalance of data prediction.</p>
 
-<p><img src="assets/img/2022-06-27-sentiment_analysis/media/image1.png" alt="D8664907" />In [14]:</p>
+<p><img src="assets/img/2022-06-28-sentiment_analysis/media/image1.png" alt="D8664907" />In [14]:</p>
 
 <p># Explore the data</p>
 
@@ -1194,7 +1194,7 @@ window.onload = wrap_img;
 
 <p>plt.show()</p>
 
-<h1><img src="assets/img/2022-06-27-sentiment_analysis/media/image2.png" alt="DFF97F5C" /></h1>
+<h1><img src="assets/img/2022-06-28-sentiment_analysis/media/image2.png" alt="DFF97F5C" /></h1>
 
 <h1 id="data-preprocessing">Data Preprocessing<a href="#Data-Preprocessing">¶</a></h1>
 
@@ -1470,7 +1470,7 @@ window.onload = wrap_img;
 
 <p>”\nwordcloud = WordCloud(width = 1500, height = 1500,background_color =’white’,min_font_size = 10).generate(comment_words)\nplt.figure(figsize=(15, 10))\nplt.imshow(wordcloud)\nplt.title(‘High Frequency of Words Found in Customer Reviews’)\nplt.savefig(‘wordclound.png’) # set the file to png.\n”</p>
 
-<p><img src="assets/img/2022-06-27-sentiment_analysis/media/image3.png" alt="38661FAD" />do the visualization with heatmap Assumption: different score review should have different position in vector space so we will utilize heat map to answer the question that the reviews with different range of score are really different in vector space</p>
+<p><img src="assets/img/2022-06-28-sentiment_analysis/media/image3.png" alt="38661FAD" />do the visualization with heatmap Assumption: different score review should have different position in vector space so we will utilize heat map to answer the question that the reviews with different range of score are really different in vector space</p>
 
 <h3 id="a-short-note-of-what-is-word-embedding">A short note of what is Word Embedding<a href="#A-short-note-of-what-is-Word-Embedding">¶</a></h3>
 
@@ -1858,7 +1858,7 @@ window.onload = wrap_img;
 
 <p>#because they have significanet different range of score.</p>
 
-<p><img src="assets/img/2022-06-27-sentiment_analysis/media/image4.png" alt="A5B389CA" />In [45]:</p>
+<p><img src="assets/img/2022-06-28-sentiment_analysis/media/image4.png" alt="A5B389CA" />In [45]:</p>
 
 <p>#compare score 5 to another 5 score review</p>
 
@@ -1924,7 +1924,7 @@ window.onload = wrap_img;
 
 <p>#Note: While comparing between those review with only 5 score, they show the likelihood of being similar more.</p>
 
-<p><img src="assets/img/2022-06-27-sentiment_analysis/media/image5.png" alt="67BE7B43" />In [51]:</p>
+<p><img src="assets/img/2022-06-28-sentiment_analysis/media/image5.png" alt="67BE7B43" />In [51]:</p>
 
 <p>#pulling out some review which has high correlation and see how they being similar</p>
 
@@ -2083,7 +2083,7 @@ window.onload = wrap_img;
 
 <p>plt.show()</p>
 
-<p><img src="https://leesuwonthan.github.io/leesuwonthan/assets/img/2022-06-27-sentiment_analysis/media/image6.png" alt="" />Because the review of cutomer comprise of ‘satisfied review’ more thatn ‘not satisfied review’ significantly, this could lead to ‘Imbalanced of sentimental class’,which might affect model to be biased. However, in this report, dealing with that issue is out of scope so we will randome pick samples from both group in the equal amount</p>
+<p><img src="https://leesuwonthan.github.io/leesuwonthan/assets/img/2022-06-28-sentiment_analysis/media/image6.png" alt="" />Because the review of cutomer comprise of ‘satisfied review’ more thatn ‘not satisfied review’ significantly, this could lead to ‘Imbalanced of sentimental class’,which might affect model to be biased. However, in this report, dealing with that issue is out of scope so we will randome pick samples from both group in the equal amount</p>
 
 <h1 id="get-a-sample-set">Get a sample set<a href="#Get-a-sample-set">¶</a></h1>
 
@@ -2127,7 +2127,7 @@ window.onload = wrap_img;
 
 <p>#the problem of imbalancing data set is gone</p>
 
-<p><img src="https://leesuwonthan.github.io/leesuwonthan/assets/img/2022-06-27-sentiment_analysis/media/image7.png" alt="" />In [64]:</p>
+<p><img src="https://leesuwonthan.github.io/leesuwonthan/assets/img/2022-06-28-sentiment_analysis/media/image7.png" alt="" />In [64]:</p>
 
 <p>#Tokenization</p>
 
@@ -3485,9 +3485,9 @@ window.onload = wrap_img;
 
 <p>plt.show()</p>
 
-<p><img src="https://leesuwonthan.github.io/leesuwonthan/assets/img/2022-06-27-sentiment_analysis/media/image8.png" alt="" />x_train: The training part of the first sequence (x) x_test: The test part of the first sequence (x) y_train: The training part of the second sequence (y) y_test: The test part of the second sequence (y)</p>
+<p><img src="https://leesuwonthan.github.io/leesuwonthan/assets/img/2022-06-28-sentiment_analysis/media/image8.png" alt="" />x_train: The training part of the first sequence (x) x_test: The test part of the first sequence (x) y_train: The training part of the second sequence (y) y_test: The test part of the second sequence (y)</p>
 
-  </div><a class="u-url" href="/leesuwonthan/2022/06/27/sentiment_analysis.html" hidden></a>
+  </div><a class="u-url" href="/leesuwonthan/2022/06/28/sentiment_analysis.html" hidden></a>
 </article>
 
       </div>
